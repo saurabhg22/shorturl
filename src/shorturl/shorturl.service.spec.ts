@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ShorturlController } from './shorturl.controller';
+import { LoggerService } from '../shared/logger/logger.service';
 import { ShorturlRepository } from './shorturl.repository';
 import { ShorturlService } from './shorturl.service';
 
@@ -35,6 +35,10 @@ describe('ShorturlService', () => {
               inMemShortUrls[index] = { ...inMemShortUrls[index], ...updates };
             },
           },
+        },
+        {
+          provide: LoggerService,
+          useClass: LoggerService,
         },
       ],
     }).compile();

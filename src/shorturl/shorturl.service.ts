@@ -5,7 +5,7 @@ import {
   NotFoundException,
   UnprocessableEntityException,
 } from '@nestjs/common';
-import { LoggerService } from 'src/shared/logger/logger.service';
+import { LoggerService } from '../shared/logger/logger.service';
 import { ShorturlRepository } from './shorturl.repository';
 import { Shorturl } from './shorturl.schema';
 
