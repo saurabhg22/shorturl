@@ -1,0 +1,36 @@
+version: "3.8"
+
+networks:
+  shorturl-network:
+
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_storage:/data/db
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+    networks:
+      - shorturl-network
+
+  production-shorturl:
+    build: .
+    container_name: production-shorturl
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    networks:
+      - shorturl-network
+    depends_on:
+      - mongodb
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/shorturl
+
+
+volumes:
+  mongo_storage:
